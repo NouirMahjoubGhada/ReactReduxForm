@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import AddUser from './AddUser';
-import { addUser } from '../../Actions/UserAction';
+import { addUser, getUser, deleteUser } from '../../Actions/UserAction';
 import UserList from './UserList';
 import CardBox from '../CardBox/index';
 import { parsePhoneNumberFromString } from 'libphonenumber-js';
 import { connect } from 'react-redux';
+import moment from 'moment';
+
 
 class User extends Component {
 	constructor() {
@@ -22,10 +24,24 @@ class User extends Component {
 		this.handleChange = this.handleChange.bind(this);
 		this.handleChangePhone = this.handleChangePhone.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
-		
 	}
 
-	
+	componentDidMount() {
+		this.props.dispatch(getUser());
+		this.setState({
+			userList: this.props.userList
+		});
+	}
+
+	// this will update our component
+	componentDidUpdate(prevProps) {
+		if (prevProps.userList !== this.props.userList) {
+			this.setState({
+				userList: this.props.userList
+			});
+		}
+	}
+
 	handleSubmit(event) {
 		event.preventDefault();
 
@@ -34,7 +50,7 @@ class User extends Component {
 			prenom: this.state.prenom,
 			email: this.state.email,
 			phone: this.state.phone,
-			date: this.state.date,
+			date: new Date(this.state.date),
 			fonction: this.state.fonction,
 			description: this.state.description
 		};
@@ -54,13 +70,10 @@ class User extends Component {
 	handleChange = (name) => (event) => {
 		this.setState({ [name]: event.target.value }, () => console.log('name', event.target.value));
 	};
-	// handleChangeFunction = (name) => (event) => {
-	// 	this.setState({ [name]: event.target.value });
-	// };
+	
 	handleChangePhone = (value) => {
 		this.setState({ phone: value });
 	};
-	//fonction
 
 	isNom(value) {
 		if (value != null) {

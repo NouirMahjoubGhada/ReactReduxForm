@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-//import CardBox from '../CardBox/index';
 import { Select, FormControl, InputLabel, MenuItem, TextareaAutosize } from '@material-ui/core';
-//import Icon from '@material-ui/core/Icon';
-//import DeleteIcon from '@material-ui/icons/Delete';
 import MuiPhoneNumber from 'material-ui-phone-number';
 import { Modal, ModalBody, ModalHeader } from 'reactstrap';
 
@@ -20,13 +17,7 @@ class EditUser extends React.Component {
 			<Modal isOpen={this.props.isOpen}>
 				<ModalHeader className="modal-box-header bg-primary text-white" />
 				<ModalBody>
-					{/* <form onSubmit={this.props.handleSubmit} autoComplete="off" className="form">
-						<h2 style={{ textAlign: 'center' }}>
-							<b>Formulaire </b>
-						</h2>
-						<div className="d-flex flex-column col-lg-12 col-md-12 col-sm-12 justify-content-center align-items-center">
-							<div className="d-flex col-lg-4 col-md-4 col-sm-4"> */}
-
+					
 					<form onSubmit={this.props.handleSubmit} autoComplete="off" className="form">
 						<h2 style={{ textAlign: 'center' }}>
 							<b>Formulaire </b>

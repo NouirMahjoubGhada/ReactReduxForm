@@ -11,12 +11,14 @@ import _ from 'lodash';
 import UserListItem from './UserListItem';
 import { deleteUser, editUser } from '../../Actions/UserAction';
 import { parsePhoneNumberFromString } from 'libphonenumber-js';
+import moment from 'moment';
 
 class UserList extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			index: '',
+			id: 0,
+			isOpen:false,
 			nom: '',
 			prenom: '',
 			email: '',
@@ -28,31 +30,26 @@ class UserList extends React.Component {
 
 		//----------------------------------------- Add this --------------------------------
 
-		// this.handleDelete = this.handleDelete.bind(this);
-		// this.handleEdit = this.handleEdit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleEdit = this.handleEdit.bind(this);
 		this.handleDelete = this.handleDelete.bind(this);
 	}
-	handleDelete = (userIndex, event) => {
+	handleDelete = (userId, event) => {
 		event.preventDefault();
-		// to use action you should add "connect"
-		console.log(userIndex);
-
-		this.props.dispatch(deleteUser(userIndex));
+		this.props.dispatch(deleteUser(userId));
 	};
 
-	handleEdit = (item, index, event) => {
+	handleEdit = (item, event) => {
 		event.preventDefault();
 		this.setState({
-			index: index,
+			id: item.id,
 			isOpen: true,
 			nom: item.nom,
 			prenom: item.prenom,
 			email: item.email,
 			phone: item.phone,
-			date: item.date,
+			date: moment(item.date).format("YYYY-MM-DD"),
 			fonction: item.fonction,
 			description: item.description
 		});
@@ -62,15 +59,16 @@ class UserList extends React.Component {
 		event.preventDefault();
 
 		let data = {
+			id: this.state.id,
 			nom: this.state.nom,
 			prenom: this.state.prenom,
 			email: this.state.email,
 			phone: this.state.phone,
-			date: this.state.date,
+			date: new Date(this.state.date),
 			fonction: this.state.fonction,
 			description: this.state.description
 		};
-		this.props.dispatch(editUser(this.state.index, data));
+		this.props.dispatch(editUser(data));
 		this.setState({
 			isOpen: false
 		});
@@ -162,7 +160,6 @@ class UserList extends React.Component {
 							return (
 								<UserListItem
 									UserItem={UserItem}
-									Index={index}
 									handleEdit={this.handleEdit}
 									handleDelete={this.handleDelete}
 								/>
@@ -170,33 +167,7 @@ class UserList extends React.Component {
 						})}
 					</TableBody>
 				</Table>
-				{/* <TableContainer component={Paper}>
-					<Table className={classes.table} aria-label="customized table">
-						<TableHead>
-							<TableRow>
-								<StyledTableCell>Dessert (100g serving)</StyledTableCell>
-								<StyledTableCell align="right">Calories</StyledTableCell>
-								<StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>
-								<StyledTableCell align="right">Carbs&nbsp;(g)</StyledTableCell>
-								<StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell>
-							</TableRow>
-						</TableHead>
-						<TableBody>
-							{rows.map((row) => (
-								<StyledTableRow key={row.name}>
-									<StyledTableCell component="th" scope="row">
-										{row.name}
-									</StyledTableCell>
-									<StyledTableCell align="right">{row.calories}</StyledTableCell>
-									<StyledTableCell align="right">{row.fat}</StyledTableCell>
-									<StyledTableCell align="right">{row.carbs}</StyledTableCell>
-									<StyledTableCell align="right">{row.protein}</StyledTableCell>
-								</StyledTableRow>
-							))}
-						</TableBody>
-					</Table>
-				</TableContainer>
-				); */}
+				
 				{this.state.isOpen ? (
 					<EditUser
 						users={this.state.item}

@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-//import CardBox from '../CardBox/index';
 import { Select, FormControl, InputLabel, MenuItem, TextareaAutosize } from '@material-ui/core';
-//import Icon from '@material-ui/core/Icon';
-//import DeleteIcon from '@material-ui/icons/Delete';
 import MuiPhoneNumber from 'material-ui-phone-number';
+
 
 class AddUser extends React.Component {
 	constructor() {
@@ -15,6 +13,7 @@ class AddUser extends React.Component {
 	render() {
 		const { values } = this.props;
 		return (
+			
 			<form onSubmit={this.props.handleSubmit} autoComplete="off" className="form">
 				<h2 style={{ textAlign: 'center' }}>
 					<b>Formulaire </b>
@@ -156,22 +155,4 @@ class AddUser extends React.Component {
 }
 
 export default AddUser;
-//{
-/* <CardBox styleName=" text-black" >
-							<div className="d-flex flex-column" style={{backgroundColor:"red"}}>
-								<div className="d-flex flex-wrap  align-items-center ">
-									<div className="d-flex col-lg-4 col-md-4 col-sm-4" style={{backgroundColor:"yellow"}}>
-										<TextField
-											
-											id="nameSection"
-											label="Nom"
-											// value={this.props.values.nameSection}
-											// onChange={this.props.handleChange('nameSection')}
-											margin="normal"
-											fullWidth
-										/>
-									</div>
-								</div>
-							</div>
-						</CardBox> */
-//}
+
