@@ -1,4 +1,4 @@
-import { ADD_USER, GET_USER, DELETE_USER, EDIT_USER } from '../Constantes/ActionTypes';
+import { ADD_USER, GET_USER, DELETE_USER, EDIT_USER } from '../../Constants/ActionTypes';
 import axios from 'axios';
 
 export function addUser(data) {

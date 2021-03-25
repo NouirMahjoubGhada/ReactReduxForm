@@ -9,15 +9,17 @@ import { connect } from 'react-redux';
 import EditUser from './EditUser';
 import _ from 'lodash';
 import UserListItem from './UserListItem';
-import { deleteUser, editUser } from '../../Actions/UserAction';
+import { deleteUser, editUser } from '../../Redux/Actions/UserAction';
 import { parsePhoneNumberFromString } from 'libphonenumber-js';
 import moment from 'moment';
+
+
 
 class UserList extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			id: 0,
+			item: {},
 			isOpen:false,
 			nom: '',
 			prenom: '',
@@ -125,13 +127,15 @@ class UserList extends React.Component {
 
 	render() {
 		return (
-
-
-			<div className="div">
-				<Table className="table">
-					<TableHead>
-						<TableRow className="row">
-							<TableCell>
+			
+			<div className="h2 text-center py-2">Liste des utilisateurs 
+			<br />
+			<br />
+			<div className="div"> 
+				<Table className="table" >
+					<TableHead >
+						<TableRow  className="row">
+							<TableCell >
 								<div>Nom</div>
 							</TableCell>
 							<TableCell>
@@ -186,6 +190,7 @@ class UserList extends React.Component {
 				) : (
 					''
 				)}
+			</div>
 			</div>
 		);
 	}

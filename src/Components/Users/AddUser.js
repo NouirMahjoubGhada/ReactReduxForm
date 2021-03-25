@@ -12,12 +12,10 @@ class AddUser extends React.Component {
 	}
 	render() {
 		const { values } = this.props;
+
 		return (
-			
 			<form onSubmit={this.props.handleSubmit} autoComplete="off" className="form">
-				<h2 style={{ textAlign: 'center' }}>
-					<b>Formulaire </b>
-				</h2>
+				<p className="form" >Form Contact</p>
 				<div className="d-flex flex-column col-lg-12 col-md-12 col-sm-12 justify-content-center align-items-center">
 					<div className="d-flex col-lg-4 col-md-4 col-sm-4">
 						<TextField
@@ -48,7 +46,6 @@ class AddUser extends React.Component {
 
 					<div className="d-flex col-lg-4 col-md-4 col-sm-4">
 						<TextField
-							required
 							label="Email"
 							name="email"
 							value={values.email}
@@ -70,7 +67,7 @@ class AddUser extends React.Component {
 							defaultCountry={'tn'}
 							name="phone"
 							// country={this.props.values.countrie_locale === "ar" ? "tn" : "fr"}
-							value={this.props.values.phone}
+							value={values.phone}
 							onChange={this.props.handleChangePhone}
 							placeholder="(+XXX) XXX XXX XXX"
 							margin="normal"
@@ -121,6 +118,7 @@ class AddUser extends React.Component {
 							</Select>
 						</FormControl>
 					</div>
+					<br />
 
 					<div className="d-flex col-lg-4 col-md-4 col-sm-4 d-flex mb-3">
 						<TextareaAutosize
@@ -134,15 +132,23 @@ class AddUser extends React.Component {
 					</div>
 
 					<div className="d-flex flex-wrap justify-content-end p-3">
-						<Button type="submit">
+						{/* <Button type="submit">
 							<div className="btn btn-danger mr-1" color="danger">
 								{' '}
 								Annuler{' '}
 							</div>
-						</Button>
+						</Button> */}
 
-						<Button type="submit">
-							<div className="btn btn-primary" onChange={this.props.handleChange('description')}>
+						<Button
+							type="submit"
+							disabled={
+								!this.props.isNom(values.nom) ||
+								!this.props.isPrenom(values.prenom) ||
+								!this.props.isEmail(values.email) ||
+								!this.props.isValidphoneNumber(values.phone)
+							}
+						>
+							<div className="btn btn-primary" onChange={this.props.handleChange}>
 								{' '}
 								Valider{' '}
 							</div>
@@ -155,4 +161,3 @@ class AddUser extends React.Component {
 }
 
 export default AddUser;
-

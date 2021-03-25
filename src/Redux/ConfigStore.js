@@ -1,6 +1,6 @@
 
 import { applyMiddleware, compose, createStore } from "redux";
-import reducers from "../Reducers/index";
+import reducers from '../Redux/Reducers/index';
 import { createBrowserHistory } from "history";
 import { routerMiddleware } from "connected-react-router";
 import thunk from "redux-thunk";
@@ -34,8 +34,8 @@ composedEnhancers
 
 if (module.hot) {
 // Enable Webpack hot module replacement for reducers
-module.hot.accept("../Reducers/index", () => {
-const nextRootReducer = require("../Reducers/index");
+module.hot.accept("../Redux/Reducers/index", () => {
+const nextRootReducer = require("../Redux/Reducers/index");
 store.replaceReducer(nextRootReducer);
 });
 }

@@ -4,8 +4,20 @@ import Button from '@material-ui/core/Button';
 import { Select, FormControl, InputLabel, MenuItem, TextareaAutosize } from '@material-ui/core';
 import MuiPhoneNumber from 'material-ui-phone-number';
 import { Modal, ModalBody, ModalHeader } from 'reactstrap';
+import { parsePhoneNumberFromString } from 'libphonenumber-js';
+
 
 class EditUser extends React.Component {
+	isValidphoneNumber = (number) => {
+		const tel = parsePhoneNumberFromString(number);
+		let res = false;
+		if (tel) {
+		  res = tel.isValid();
+		}
+	
+		return res;
+	  };
+	
 	constructor() {
 		super();
 		this.state = {};
@@ -77,7 +89,7 @@ class EditUser extends React.Component {
 									label="Téléphone"
 									defaultCountry={'tn'}
 									name="phone"
-									value={this.props.values.phone}
+									value={values.phone}
 									onChange={this.props.handleChangePhone}
 									placeholder="(+XXX) XXX XXX XXX"
 									margin="normal"

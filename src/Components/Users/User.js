@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import AddUser from './AddUser';
-import { addUser, getUser, deleteUser } from '../../Actions/UserAction';
+import { addUser, getUser, deleteUser } from '../../Redux/Actions/UserAction';
 import UserList from './UserList';
 import CardBox from '../CardBox/index';
 import { parsePhoneNumberFromString } from 'libphonenumber-js';
 import { connect } from 'react-redux';
 import moment from 'moment';
+
 
 
 class User extends Component {
@@ -42,8 +43,10 @@ class User extends Component {
 		}
 	}
 
+
+
 	handleSubmit(event) {
-		event.preventDefault();
+		 event.preventDefault();
 
 		let data = {
 			nom: this.state.nom,
@@ -69,6 +72,7 @@ class User extends Component {
 	}
 	handleChange = (name) => (event) => {
 		this.setState({ [name]: event.target.value }, () => console.log('name', event.target.value));
+		
 	};
 	
 	handleChangePhone = (value) => {
@@ -120,6 +124,15 @@ class User extends Component {
 		return res;
 	};
 
+	isDesc(value) {
+		if (value != null) {
+			if (value.length > 0) return /^[A-Za-z]+/.test(value);
+			else return true;
+		} else {
+			return false;
+		}
+	}
+	
 	render() {
 		return (
 			<div className="app-wrapper" style={{}}>
@@ -137,6 +150,7 @@ class User extends Component {
 								isPhonenumber={this.isPhonenumber}
 								isZipCode={this.isZipCode}
 								isValidphoneNumber={this.isValidphoneNumber}
+								isDesc={this.isDesc}
 							/>
 						</CardBox>
 					</div>
